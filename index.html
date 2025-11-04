@@ -68,10 +68,7 @@
       <div id="result"></div>
       <div class="btn-group">
         <button id="back4">Terug</button>
-        <button onclick="window.open('https://www.autocentrumvanvliet.nl/acties/november-voordeelstorm/contactformulier', '_blank')">
-  Maak direct een afspraak!
-</button>
-
+        <button onclick="location.href='https://www.autocentrumvanvliet.nl/acties/november-voordeelstorm#webform-contact'">Maak direct een afspraak!</button>	
       </div>  
     </div>
   </section>
@@ -571,7 +568,7 @@
   // Stap 1 → Stap 2
   document.getElementById("next1").addEventListener("click", () => {
     const merk = document.getElementById("merkSelect").value;
-    if (!merk) return alert("Kies een merk!");
+    if (!merk) return;
     selections.merk = merk;
   
     const modelSelect = document.getElementById("modelSelect");
@@ -589,7 +586,7 @@
   // Stap 2 → Stap 3
   document.getElementById("next2").addEventListener("click", () => {
     const model = document.getElementById("modelSelect").value;
-    if (!model) return alert("Kies een model!");
+    if (!model) return;
     selections.model = model;
     showStep(3);
   });
@@ -598,7 +595,7 @@
   // Stap 3 → Stap 4
   document.getElementById("next3").addEventListener("click", () => {
     const type = document.querySelector('input[name="type"]:checked');
-    if (!type) return alert("Kies een type!");
+    if (!type) return;
     selections.type = type.value;
   
     const acties = data[selections.merk][selections.model][selections.type] || [];
@@ -615,4 +612,3 @@
 
 </body>
 </html>
-
