@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vind jouw actie - Ontdek de beste deals voor Opel, Peugeot en Citroën">
+  <title>Vind jouw actie - Golden Deals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<section id="actieWizard" class="wizard">
+    <h2>Vind jouw actie</h2>
+    
+    <!-- Progress bar -->
+    <div class="progress">
+      <div class="progress-step active">1</div>
+      <div class="progress-step">2</div>
+      <div class="progress-step">3</div>
+      <div class="progress-step">✔</div>
+    </div>
+  
+    <!-- Stap 1: Merk -->
+    <div class="step active" data-step="1">
+      <h3>Kies een merk</h3>
+      <select id="merkSelect">
+        <option value="">-- Kies merk --</option>
+        <option value="Opel">Opel</option>
+        <option value="Peugeot">Peugeot</option>
+        <option value="Citroën">Citroën</option>
+      </select>
+      <div class="btn-group">
+           <button id="next1">Volgende</button>
+      </div>  
+  
+    </div>
+  
+    <!-- Stap 2: Model -->
+    <div class="step" data-step="2">
+      <h3>Kies een model</h3>
+      <select id="modelSelect"></select>
+      <div class="btn-group">
+          <button id="back2">Terug</button>
+          <button id="next2">Volgende</button> 
+      </div>  
+  
+    </div>
+  
+    <!-- Stap 3: Type -->
+    <div class="step" data-step="3">
+      <h3>Kies type aanschaf</h3>
+      <label><input type="radio" name="type" value="Lease"> Lease</label><br>
+      <label><input type="radio" name="type" value="Financiering"> Financiering</label><br>
+      <label><input type="radio" name="type" value="Koop"> Koop</label><br>
+      <div class="btn-group">
+           <button id="back3">Terug</button>
+          <button id="next3">Bekijk acties</button> 
+      </div>
+        
+  
+    </div>
+  
+    <!-- Stap 4: Resultaat -->
+    <div class="step" data-step="4">
+      <h3>Beschikbare acties</h3>
+      <div id="result"></div>
+      <div class="btn-group">
+        <button id="back4">Terug</button>
+        <button onclick="location.href='https://www.autocentrumvanvliet.nl/acties/november-voordeelstorm#webform-contact'">Maak direct een afspraak!</button>	
+      </div>  
+    </div>
+  </section>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    background-image: url("https://www.autocentrumvanvliet.nl/sites/default/files/2025-11/Autocentrum-Van-Vliet-Actie-November-Voordeelstorm-Module.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .wizard { 
+    width: 600px;
+    max-width: 100%;
+    padding: 24px; 
+    border: 1px solid #eee; 
+    border-radius: 12px; 
+    background: #fff; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    font-family: Montserrat;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .wizard > h2 {
+    margin: 0 0 20px 0;
+    flex-shrink: 0;
+  }
+  
+  /* voortgangsbalk */
+  .progress { 
+    display: flex; justify-content: space-between; margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  .progress-step {
+    width: 36px; height: 36px; border-radius: 50%; 
+    display: flex; justify-content: center; align-items: center;
+    background: #e0e0e0; color: #fff; font-weight: 600;
+    transition: background 0.3s;
+  }
+  .progress-step.active { background: #d63311; }
+  
+  /* stappen */
+  .step { 
+    display: none;
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 8px;
+    min-height: 0;
+  }
+  .step.active { display: flex; flex-direction: column; }
+  
+  .step h3 {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+  
+  #result {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 16px;
+    min-height: 0;
+  }
+  
+  .btn-group {
+    margin-top: auto;
+    padding-top: 16px;
+    flex-shrink: 0;
+  }
+  
+  /* dropdowns */
+  select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    font-size: 15px;
+    transition: all 0.3s;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+  }
+  select:focus {
+    border-color: #d63311;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(235,136,35,0.2);
+    outline: none;
+  }
+  
+  /* knoppen */
+  button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 8px 4px 0 0;
+  }
+  button:hover { transform: translateY(-1px); }
+  
+  /* primaire actie */
+  button[id^="next"], #closeModal {
+    background: #d63311; 
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba(235,136,35,0.2);
+  }
+  button[id^="next"]:hover, #closeModal:hover {
+    background: #eb8823;
+  }
+  
+  /* secundaire actie */
+  button[id^="back"] {
+    background: #f1f1f1;
+    color: #333;
+  }
+  button[id^="back"]:hover {
+    background: #e0e0e0;
+  }
+  
+  /* acties blok */
+  .actions {
+    margin: 10px 0; padding: 12px 14px; 
+    background: #f8faff; 
+    border-left: 4px solid #d63311;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  /* Scrollbar styling for steps */
+  .step::-webkit-scrollbar,
+  #result::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .step::-webkit-scrollbar-track,
+  #result::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .step::-webkit-scrollbar-thumb,
+  #result::-webkit-scrollbar-thumb {
+    background: #d63311;
+    border-radius: 10px;
+  }
+  
+  .step::-webkit-scrollbar-thumb:hover,
+  #result::-webkit-scrollbar-thumb:hover {
+    background: #eb8823;
+  }
+  
+  .discount-section {
+    margin-bottom: 18px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .discount-title {
+    font-size: 1em;
+    font-weight: bold;
+    color: #d4af37;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    font-family: 'Georgia', serif;
+  }
+  
+  .discount-panel {
+    position: absolute;
+    top: 100%;
+    left: -2px;
+    right: -2px;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    color: #f5f5f5;
+    border-radius: 0 0 10px 10px;
+    padding: 25px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s ease;
+    z-index: 103;
+    max-height: 0;
+    overflow-y: auto;
+    box-shadow: 0 15px 50px rgba(212, 175, 55, 0.3), 0 0 0 2px #d4af37;
+    border: 2px solid #d4af37;
+    border-top: none;
+  }
+  
+  .discount-panel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #f4d03f 0%, #d4af37 100%);
+  }
+  
+  .discount-item {
+    font-size: 0.9em;
+    line-height: 1.8;
+    margin-bottom: 6px;
+    padding-left: 20px;
+    position: relative;
+    color: #e8e8e8;
+  }
+
+  .discount-item:before {
+    content: "◆";
+    position: absolute;
+    left: 0;
+    color: #d4af37;
+    font-size: 0.8em;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
+  }
+
+  .discount-highlight {
+    color: #d4af37;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+    font-size: 1.05em;
+  }
+
+  .bonus-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    color: #000000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    border: 1px solid #f4d03f;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .validity-notice {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 0.85em;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    color: #d4af37;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+
+  /* Scrollbar styling */
+  .discount-panel::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .discount-panel::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 10px;
+  }
+
+  .discount-panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+    border-radius: 10px;
+    border: 1px solid #000000;
+  }
+  
+  </style>
+  
+  <script>
+	  const data = {
+  Opel: {
+    Corsa: {
+      Lease: ["Gratis eProWallbox (electric + business edition)"],
+      Financiering: [
+        "Benzine: 4,9%",
+        "Electric: 1,9%",
+        "Electric Business Edition: 4,9%"
+      ],
+      Koop: [
+        "Inruilvoordeel Benzine: €3.000",
+        "Inruilvoordeel Electric: €4.000",
+        "Voorraadvoucher Electric: €500",
+        "Voorraadvoucher Electric Business Edition: €1.500",
+		"Gratis eProWallbox (electric + business edition)"  
+      ]
+    },
+    Mokka: {
+      Lease: ["Gratis eProWallbox (electric)"],
+      Financiering: [
+        "Benzine: 4,9%",
+        "Electric: 1,9%",
+        "Electric Business Edition: 4,9%"
+      ],
+      Koop: [
+        "Inruilvoordeel Benzine: €3.000",
+        "Inruilvoordeel Electric: €4.000",
+        "Voorraadvoucher Electric: €500",
+        "Voorraadvoucher Electric Business Edition: €1.500",
+		"Gratis eProWallbox (electric + business edition)"  
+      ]
+    },
+    Frontera: {
+      Lease: ["Gratis eProWallbox (electric)"],
+      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
+      Koop: [
+        "Inruilvoordeel Benzine: €1.500",
+        "Inruilvoordeel Electric: €2.500",
+        "Voorraadvoucher Electric: €500",
+		"Gratis eProWallbox (electric + business edition)"  
+      ]
+    },
+    Astra: {
+      Lease: [, "Gratis eProWallbox (electric + business edition + PHEV)"],
+      Financiering: [
+        "Benzine: 4,9%",
+        "PHEV: 1,9%",
+        "Electric: 1,9%",
+        "Electric Business Edition: 4,9%"
+      ],
+      Koop: [
+        "Inruilvoordeel Benzine: €4.000",
+        "Inruilvoordeel PHEV: €4.000",
+        "Inruilvoordeel Electric: €5.000",
+        "Voorraadvoucher Electric: €500",
+        "Voorraadvoucher Electric Business Edition: €1.500",
+		"Gratis eProWallbox (electric + business edition)"  
+      ]
+    },
+    Grandland: {
+      Lease: ["Gratis eProWallbox (electric + business edition + PHEV)"],
+      Financiering: [
+        "Benzine: 4,9%",
+        "PHEV: 1,9%",
+        "Electric: 1,9%",
+        "Electric Business Edition: 4,9%"
+      ],
+      Koop: [
+        "Inruilvoordeel Benzine: €4.000",
+        "Inruilvoordeel PHEV: €4.000",
+        "Inruilvoordeel Electric: €5.000",
+        "Voorraadvoucher Electric: €500",
+        "Voorraadvoucher Electric Business Edition: €1.500",
+		"Gratis eProWallbox (electric + business edition)"  
+      ]
+    }
+  },
+
+  Peugeot: {
+    "208": {
+      Lease: ["Gratis eProWallbox (electric)","€30 korting per maand (private lease)"],
+      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
+      Koop: ["Inruilvoordeel Benzine: €2.000", "Inruilvoordeel Electric: €2.500"]
+    },
+    "2008": {
+      Lease: ["Gratis eProWallbox (electric)","€30 korting per maand (private lease)"],
+      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
+      Koop: ["Inruilvoordeel Benzine: €3.000", "Voorraadpremie Electric: €5.000"]
+    },
+    "308 voorraad (SW)": {
+      Lease: ["Gratis eProWallbox (electric + PHEV)","€30 korting per maand (private lease)"],
+      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Voorraadpremie Benzine: €7.000",
+        "Voorraadpremie PHEV: €6.000",
+        "Voorraadpremie Electric: €6.000"
+      ]
+    },
+    "Nieuwe 308 (SW)": {
+      Financiering: ["PHEV: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Inruilvoordeel PHEV: €2.000",
+        "Inruilvoordeel Electric: €1.000"
+      ],
+      Lease: ["Gratis eProWallbox (electric + PHEV)"]
+    },
+    "408": {
+      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Voorraadpremie Benzine: €5.000",
+        "Voorraadpremie PHEV: €5.000",
+		"Voorraadpremie Electric: €5.000",  
+        "Inruilvoordeel Benzine: €1.500",
+        "Inruilvoordeel PHEV: €1.500",
+        "Inruilvoordeel Electric: €2.000"
+      ],
+      Lease: ["Gratis eProWallbox (electric + PHEV)"]
+    },
+    "3008": {
+      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Voorraadpremie Electric (AWD Launch Edition): €2.000",
+		"Voorraadpremie Benzine: €1.000",
+		"Voorraadpremie PHEV: €1.000",
+        "Inruilvoordeel Benzine: €3.000",
+        "Inruilvoordeel PHEV: €3.000",
+        "Inruilvoordeel Electric: €2.500"
+      ],
+      Lease: ["Gratis eProWallbox (electric + PHEV)"]
+    },
+    "5008": {
+      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Voorraadpremie Plug-in Hybrid): €1.000",
+		"Voorraadpremie Benzine: €1.000",
+		"Voorraadpremie Electric (AWD Launch Edition): €2.000",  
+        "Inruilvoordeel Benzine: €3.000",
+        "Inruilvoordeel PHEV: €3.000",
+        "Inruilvoordeel Electric: €2.500"
+      ],
+      Lease: ["Gratis eProWallbox (electric + PHEV)"]
+    },
+    "508 (SW)": {
+      Financiering: ["1,9% rente"],
+      Koop: ["Voorraadpremie: €4.500", "Inruilvoordeel: €2.500"],
+      Lease: ["Gratis eProWallbox"]
+    },
+
+  },
+
+  Citroën: {
+    C3: {
+      Lease:["Gratis eProWallbox (electric)"],
+      Financiering: ["Benzine/Hybride: 4,9%", "Electric: 1,9%"],
+      Koop: [
+        "Verkooppremie Benzine/Hybride: €500",
+        "Verkooppremie Electric: €1.000",
+        "Voorraadvoucher Electric: €1.000",
+      ]
+    },
+    "C3 Aircross": {
+      Lease: ["Gratis eProWallbox (electric)"],
+      Financiering: ["Benzine/Hybride: 4,9%", "Electric: 1,9%"],
+      Koop: [
+        "Verkooppremie Benzine/Hybride: €1.000",
+        "Verkooppremie Electric: tot €1.500",
+        "Voorraadvoucher Electric: €1.000",
+      ]
+    },
+    "C4 / C4 X": {
+      Lease: ["Gratis eProWallbox (electric)"],
+      Financiering: ["Hybride: 4,9%", "Electric: 1,9%"],
+      Koop: [
+        "Verkooppremie Hybride: €1.500",
+        "Verkooppremie Electric: tot €1.000",
+        "Voorraadvoucher Electric: €1.000",
+      ]
+    },
+    "Nieuwe C5 Aircross": {
+      Lease: ["Gratis eProWallbox (electric)"],
+      Financiering: ["Hybride: 4,9%", "Plug-in Hybride: 1,9%", "Electric: 1,9%"],
+      Koop: [
+        "Voorraadvoucher Electric: €1.000",
+		"Voorraadvoucher (Plug-in) Hybride: €1.000",
+      ]
+    },
+    "C5 X": {
+      Lease: ["Gratis eProWallbox (plug-in hybride)"],
+      Financiering: ["Hybride: 4,9%", "Plug-in Hybride: 1,9%"],
+      Koop: [
+        "Verkooppremie Hybride: €2.500",
+        "Verkooppremie Plug-in Hybride: €5.000",
+      ]
+    }
+  }
+};
+
+  
+  let currentStep = 1;
+  let selections = { merk: "", model: "", type: "" };
+  
+  function showStep(step) {
+    document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+    document.querySelector(`.step[data-step="${step}"]`).classList.add("active");
+  
+    document.querySelectorAll(".progress-step").forEach((p, i) => {
+      if (i < step) p.classList.add("active");
+      else p.classList.remove("active");
+    });
+  
+    currentStep = step;
+  }
+  
+  // Stap 1 → Stap 2
+  document.getElementById("next1").addEventListener("click", () => {
+    const merk = document.getElementById("merkSelect").value;
+    if (!merk) return alert("Kies een merk!");
+    selections.merk = merk;
+  
+    const modelSelect = document.getElementById("modelSelect");
+    modelSelect.innerHTML = "";
+    Object.keys(data[merk]).forEach(model => {
+      const opt = document.createElement("option");
+      opt.value = model;
+      opt.textContent = model;
+      modelSelect.appendChild(opt);
+    });
+  
+    showStep(2);
+  });
+  
+  // Stap 2 → Stap 3
+  document.getElementById("next2").addEventListener("click", () => {
+    const model = document.getElementById("modelSelect").value;
+    if (!model) return alert("Kies een model!");
+    selections.model = model;
+    showStep(3);
+  });
+  document.getElementById("back2").addEventListener("click", () => showStep(1));
+  
+  // Stap 3 → Stap 4
+  document.getElementById("next3").addEventListener("click", () => {
+    const type = document.querySelector('input[name="type"]:checked');
+    if (!type) return alert("Kies een type!");
+    selections.type = type.value;
+  
+    const acties = data[selections.merk][selections.model][selections.type] || [];
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = acties.length 
+      ? acties.map(a => `<div class="actions">${a}</div>`).join("")
+      : "<p>Geen acties gevonden.</p>";
+  
+    showStep(4);
+  });
+  document.getElementById("back3").addEventListener("click", () => showStep(2));
+  document.getElementById("back4").addEventListener("click", () => showStep(3));
+</script>
+
+</body>
+</html>
