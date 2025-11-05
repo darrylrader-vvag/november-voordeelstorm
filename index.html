@@ -12,7 +12,7 @@
 <body>
 
 <section id="actieWizard" class="wizard">
-    <h2>Vind jouw actie</h2>
+    <h2>Vind jouw voordeel</h2>
     
     <!-- Progress bar -->
     <div class="progress">
@@ -50,6 +50,7 @@
   
     <!-- Stap 3: Type -->
     <div class="step" data-step="3">
+      <p id="selection-display-3" class="selection-display"></p>
       <h3>Kies type aanschaf</h3>
       <label><input type="radio" name="type" value="Lease"> Lease</label><br>
       <label><input type="radio" name="type" value="Financiering"> Financiering</label><br>
@@ -64,12 +65,13 @@
   
     <!-- Stap 4: Resultaat -->
     <div class="step" data-step="4">
-      <h3>Beschikbare acties</h3>
+      <p id="selection-display-4" class="selection-display"></p>
+      <h3>Jouw voordelen</h3>
       <div id="result"></div>
       <div class="btn-group">
         <button id="back4">Terug</button>
         <button onclick="window.open('https://www.autocentrumvanvliet.nl/acties/november-voordeelstorm/contactformulier', '_blank', 'noopener,noreferrer')">
-  Maak direct een afspraak!
+  Ontvang jouw voordeel
 </button>
       </div>  
     </div>
@@ -110,6 +112,19 @@
   
   .wizard > h2 {
     margin: 0 0 20px 0;
+    flex-shrink: 0;
+  }
+  
+  /* selection display */
+  .selection-display {
+    margin: 0 0 10px 0;
+    padding: 8px 12px;
+    background: #f0f8ff;
+    border-left: 3px solid #d63311;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
     flex-shrink: 0;
   }
   
@@ -359,75 +374,75 @@
     Corsa: {
       Lease: ["Gratis eProWallbox (electric + business edition)"],
       Financiering: [
-        "Benzine: 4,9%",
-        "Electric: 1,9%",
-        "Electric Business Edition: 4,9%"
+        "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen",
+        "Nu 4,9% rente op de Electric Business Edition"
       ],
       Koop: [
-        "Inruilvoordeel Benzine: €3.000",
-        "Inruilvoordeel Electric: €4.000",
-        "Voorraadvoucher Electric: €500",
-        "Voorraadvoucher Electric Business Edition: €1.500",
-		"Gratis eProWallbox (electric + business edition)"  
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de elektrische variant",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €500",
+        "Kies voor een Voorraadvoucher op de Electric Business Edition: €1.500",
+		"Nu Tijdelijk een gratis eProWallbox (electric + business edition)"  
       ]
     },
     Mokka: {
-      Lease: ["Gratis eProWallbox (electric)"],
+      Lease: ["Nu Tijdelijk een gratis eProWallbox bij EV of hybrid modellen"],
       Financiering: [
-        "Benzine: 4,9%",
-        "Electric: 1,9%",
-        "Electric Business Edition: 4,9%"
+        "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen",
+        "Nu 4,9% rente op de Electric Business Edition"
       ],
       Koop: [
-        "Inruilvoordeel Benzine: €3.000",
-        "Inruilvoordeel Electric: €4.000",
-        "Voorraadvoucher Electric: €500",
-        "Voorraadvoucher Electric Business Edition: €1.500",
-		"Gratis eProWallbox (electric + business edition)"  
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de elektrische variant",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €500",
+        "Kies voor een Voorraadvoucher op de Electric Business Edition: €1.500",
+		"Nu Tijdelijk een gratis eProWallbox (electric + business edition)"  
       ]
     },
     Frontera: {
-      Lease: ["Gratis eProWallbox (electric)"],
-      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
+      Lease: ["Nu Tijdelijk een gratis eProWallbox bij EV of hybrid modellen"],
+      Financiering: [
+		"Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen"],
       Koop: [
-        "Inruilvoordeel Benzine: €1.500",
-        "Inruilvoordeel Electric: €2.500",
-        "Voorraadvoucher Electric: €500",
-		"Gratis eProWallbox (electric + business edition)"  
+        "Ontvang €1.500 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €2.500 extra inruilvoordeel bij aankoop van de elektrische variant",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €500",
+		"Nu Tijdelijk een gratis eProWallbox (electric + business edition)" 
       ]
     },
     Astra: {
-      Lease: [, "Gratis eProWallbox (electric + business edition + PHEV)"],
+      Lease: ["Nu Tijdelijk een gratis eProWallbox bij EV of hybrid modellen"],
       Financiering: [
-        "Benzine: 4,9%",
-        "PHEV: 1,9%",
-        "Electric: 1,9%",
-        "Electric Business Edition: 4,9%"
+        "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen",
+        "Nu 4,9% rente op de Electric Business Edition"
       ],
       Koop: [
-        "Inruilvoordeel Benzine: €4.000",
-        "Inruilvoordeel PHEV: €4.000",
-        "Inruilvoordeel Electric: €5.000",
-        "Voorraadvoucher Electric: €500",
-        "Voorraadvoucher Electric Business Edition: €1.500",
-		"Gratis eProWallbox (electric + business edition)"  
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €5.000 extra inruilvoordeel bij aankoop van de elektrische variant",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €500",
+        "Kies voor een Voorraadvoucher op de Electric Business Edition: €1.500",
+		"Nu Tijdelijk een gratis eProWallbox (electric + business edition)" 
       ]
     },
     Grandland: {
       Lease: ["Gratis eProWallbox (electric + business edition + PHEV)"],
       Financiering: [
-        "Benzine: 4,9%",
-        "PHEV: 1,9%",
-        "Electric: 1,9%",
-        "Electric Business Edition: 4,9%"
+        "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen",
+        "Nu 4,9% rente op de Electric Business Edition"
       ],
       Koop: [
-        "Inruilvoordeel Benzine: €4.000",
-        "Inruilvoordeel PHEV: €4.000",
-        "Inruilvoordeel Electric: €5.000",
-        "Voorraadvoucher Electric: €500",
-        "Voorraadvoucher Electric Business Edition: €1.500",
-		"Gratis eProWallbox (electric + business edition)"  
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €4.000 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €5.000 extra inruilvoordeel bij aankoop van de elektrische variant",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €500",
+        "Kies voor een Voorraadvoucher op de Electric Business Edition: €1.500",
+		"Nu Tijdelijk een gratis eProWallbox (electric + business edition)" 
       ]
     }
   },
@@ -435,117 +450,157 @@
   Peugeot: {
     "208": {
       Lease: ["Gratis eProWallbox (electric)","€30 korting per maand (private lease)"],
-      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
-      Koop: ["Inruilvoordeel Benzine: €2.000", "Inruilvoordeel Electric: €2.500"]
+      Financiering: [
+		"Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen",
+	  ],
+      Koop: [
+		  	"Ontvang €2.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+			"Ontvang €2.500 extra inruilvoordeel bij aankoop van de elektrische variant",
+	  ]
     },
     "2008": {
       Lease: ["Gratis eProWallbox (electric)","€30 korting per maand (private lease)"],
-      Financiering: ["Benzine: 4,9%", "Electric: 1,9%"],
-      Koop: ["Inruilvoordeel Benzine: €3.000", "Voorraadpremie Electric: €5.000"]
+      Financiering: [
+		"Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen",
+	  ],
+      Koop: [
+		"Ontvang €3.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+		"Nu tijdelijk €5.000 voorraadpremie op de elektrische variant"
+	  ]
     },
     "308 voorraad (SW)": {
       Lease: ["Gratis eProWallbox (electric + PHEV)","€30 korting per maand (private lease)"],
-      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Financiering: [
+		"Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen"
+	  ],
       Koop: [
-        "Voorraadpremie Benzine: €7.000",
-        "Voorraadpremie PHEV: €6.000",
-        "Voorraadpremie Electric: €6.000"
+        "Nu tijdelijk €7.000 voorraadpremie op de benzinevariant",
+        "Nu tijdelijk €6.000 voorraadpremie op de PHEV variant",
+        "Nu tijdelijk €6.000 voorraadpremie op de elektrische variant"
       ]
     },
     "Nieuwe 308 (SW)": {
-      Financiering: ["PHEV: 1,9%", "Electric: 1,9%"],
+      Financiering: [
+		"Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV modellen", 
+	  ],
       Koop: [
-        "Inruilvoordeel PHEV: €2.000",
-        "Inruilvoordeel Electric: €1.000"
+        "Ontvang €2.000 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €1.000 extra inruilvoordeel bij aankoop van de elektrische variant",
       ],
-      Lease: ["Gratis eProWallbox (electric + PHEV)"]
+      Lease: ["Ontvang gratis de eProWallbox (uitsluitend voor electric en PHEV modellen)"]
     },
     "408": {
-      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Financiering: [
+		 "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen"
+	  ],
       Koop: [
-        "Voorraadpremie Benzine: €5.000",
-        "Voorraadpremie PHEV: €5.000",
-		"Voorraadpremie Electric: €5.000",  
-        "Inruilvoordeel Benzine: €1.500",
-        "Inruilvoordeel PHEV: €1.500",
-        "Inruilvoordeel Electric: €2.000"
+        "Nu tijdelijk €5.000 voorraadpremie op voorraadmodellen", 
+        "Ontvang €1.500 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €1.500 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €2.000 extra inruilvoordeel bij aankoop van de elektrische variant",
       ],
       Lease: ["Gratis eProWallbox (electric + PHEV)"]
     },
     "3008": {
-      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Financiering: [
+		  "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen"
+	  ],
       Koop: [
-        "Voorraadpremie Electric (AWD Launch Edition): €2.000",
-		"Voorraadpremie Benzine: €1.000",
-		"Voorraadpremie PHEV: €1.000",
-        "Inruilvoordeel Benzine: €3.000",
-        "Inruilvoordeel PHEV: €3.000",
-        "Inruilvoordeel Electric: €2.500"
+        "Nu extra voorraadpremie op de Electric AWD Launch Edition t.w.v. €2.000",
+		"Geniet van €1.000 voorraadpremie op benzine en hybrid modellen",
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €2.500 extra inruilvoordeel bij aankoop van de elektrische variant",
       ],
       Lease: ["Gratis eProWallbox (electric + PHEV)"]
     },
     "5008": {
-      Financiering: ["Benzine: 4,9%", "PHEV: 1,9%", "Electric: 1,9%"],
+      Financiering: [
+		  "Tijdelijk 4,9% rente op benzine modellen",
+        "Slechts 1,9% rente op EV en PHEV modellen"
+	  ],
       Koop: [
-        "Voorraadpremie Plug-in Hybrid): €1.000",
-		"Voorraadpremie Benzine: €1.000",
-		"Voorraadpremie Electric (AWD Launch Edition): €2.000",  
-        "Inruilvoordeel Benzine: €3.000",
-        "Inruilvoordeel PHEV: €3.000",
-        "Inruilvoordeel Electric: €2.500"
+        "Ontvang €1.000 voorraadpremie op benzine en plug-in hybrid modellen) ",
+		"Nu extra voorraadpremie op de Electric AWD Launch Edition t.w.v. €2.000",
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de benzinevariant",
+        "Ontvang €3.000 extra inruilvoordeel bij aankoop van de PHEV variant",
+        "Ontvang €2.500 extra inruilvoordeel bij aankoop van de elektrische variant",
       ],
       Lease: ["Gratis eProWallbox (electric + PHEV)"]
     },
     "508 (SW)": {
-      Financiering: ["1,9% rente"],
-      Koop: ["Voorraadpremie: €4.500", "Inruilvoordeel: €2.500"],
-      Lease: ["Gratis eProWallbox"]
+      Financiering: [
+		  "Nu tijdelijk slechts 1,9% rente"],
+      Koop: [
+		  "Ontvang €4.500 voorraadpremie op voorraadmodellen", 
+		"Ontvang €2.500 extra inruilvoordeel"],
+      Lease: ["Nu tijdelijk inclusief eProWallbox"]
     },
 
   },
 
   Citroën: {
     C3: {
-      Lease:["Gratis eProWallbox (electric)"],
-      Financiering: ["Benzine/Hybride: 4,9%", "Electric: 1,9%"],
+      Lease:["Elektrisch rijden? Nu tijdelijk inclusief eProWallbox"],
+      Financiering: [
+	  "Tijdelijk 4,9% rente op benzine en PHEV modellen",
+        "Slechts 1,9% rente op EV modellen"
+	  ],
       Koop: [
-        "Verkooppremie Benzine/Hybride: €500",
-        "Verkooppremie Electric: €1.000",
-        "Voorraadvoucher Electric: €1.000",
+        "Maak gebruik van Verkooppremie op Benzine/Hybride modellen t.w.v. €500",
+        "Nu tijdelijk €1.000 verkooppremie op EV modellen",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €1.000",,
       ]
     },
     "C3 Aircross": {
-      Lease: ["Gratis eProWallbox (electric)"],
-      Financiering: ["Benzine/Hybride: 4,9%", "Electric: 1,9%"],
+      Lease: ["Elektrisch rijden? Nu tijdelijk inclusief eProWallbox"],
+      Financiering: [
+		 "Tijdelijk 4,9% rente op benzine en PHEV modellen",
+        "Slechts 1,9% rente op EV modellen"
+	  ],
       Koop: [
-        "Verkooppremie Benzine/Hybride: €1.000",
-        "Verkooppremie Electric: tot €1.500",
-        "Voorraadvoucher Electric: €1.000",
+        "Maak gebruik van Verkooppremie op Benzine/Hybride modellen t.w.v. €1000",
+        "Nu tijdelijk €1.500 verkooppremie op EV modellen",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €1.000",
       ]
     },
     "C4 / C4 X": {
-      Lease: ["Gratis eProWallbox (electric)"],
-      Financiering: ["Hybride: 4,9%", "Electric: 1,9%"],
+      Lease: ["Elektrisch rijden? Nu tijdelijk inclusief eProWallbox"],
+      Financiering: [
+	  "Tijdelijk 4,9% rente op PHEV modellen",
+        "Slechts 1,9% rente op EV modellen"],
       Koop: [
-        "Verkooppremie Hybride: €1.500",
-        "Verkooppremie Electric: tot €1.000",
-        "Voorraadvoucher Electric: €1.000",
+        "Maak gebruik van Verkooppremie op hybride modellen t.w.v. €1500",
+        "Nu tijdelijk €1.000 verkooppremie op EV modellen",
+        "Voorraadmodel? Ontvang een voorraadvoucher voor elektrische modellen t.w.v. €1.000",
       ]
     },
     "Nieuwe C5 Aircross": {
-      Lease: ["Gratis eProWallbox (electric)"],
-      Financiering: ["Hybride: 4,9%", "Plug-in Hybride: 1,9%", "Electric: 1,9%"],
+      Lease: ["Elektrisch rijden? Nu tijdelijk inclusief eProWallbox"],
+      Financiering: [
+		"Tijdelijk 4,9% rente op Hybride modellen",
+		"Nu 1,9% rente op Plug-in Hybride modellen",
+        "Slechts 1,9% rente op EV modellen"
+					],
       Koop: [
-        "Voorraadvoucher Electric: €1.000",
-		"Voorraadvoucher (Plug-in) Hybride: €1.000",
+        "Maak direct gebruik van de Voorraadvoucher t.w.v. €1.000 voor EV en PHEV modellen",
       ]
     },
     "C5 X": {
-      Lease: ["Gratis eProWallbox (plug-in hybride)"],
-      Financiering: ["Hybride: 4,9%", "Plug-in Hybride: 1,9%"],
+      Lease: ["Elektrisch of hybride rijden? Nu tijdelijk inclusief eProWallbox"],
+      Financiering: [
+	  "Tijdelijk 4,9% rente op Hybride modellen",
+		"Nu 1,9% rente op Plug-in Hybride modellen",
+	  ],
       Koop: [
-        "Verkooppremie Hybride: €2.500",
-        "Verkooppremie Plug-in Hybride: €5.000",
+        "Ontvang €2.500 verkooppremie op hybride modellen",
+        "Liever Plug-in Hybride? Ontvang tot wel €5.000 verkooppremie",
       ]
     }
   }
@@ -590,6 +645,10 @@
     const model = document.getElementById("modelSelect").value;
     if (!model) return;
     selections.model = model;
+    
+    // Update selection display for step 3
+    document.getElementById("selection-display-3").textContent = `Jouw keuze: ${selections.merk} ${selections.model}`;
+    
     showStep(3);
   });
   document.getElementById("back2").addEventListener("click", () => showStep(1));
@@ -600,6 +659,9 @@
     if (!type) return;
     selections.type = type.value;
   
+    // Update selection display for step 4
+    document.getElementById("selection-display-4").textContent = `Jouw keuze: ${selections.merk} ${selections.model}`;
+    
     const acties = data[selections.merk][selections.model][selections.type] || [];
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = acties.length 
@@ -614,4 +676,3 @@
 
 </body>
 </html>
-
